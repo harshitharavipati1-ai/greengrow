@@ -1,0 +1,232 @@
+{
+  "users": [
+    {
+      "id": "usr_farmer1",
+      "name": "Ramesh Patel",
+      "email": "ramesh.farmer@greengrow.ai",
+      "role": "FARMER",
+      "location": "Guntur, Andhra Pradesh",
+      "farmSizeAcres": 5.5
+    },
+    {
+      "id": "usr_citizen1",
+      "name": "Ananya Sharma",
+      "email": "ananya.citizen@greengrow.ai",
+      "role": "CITIZEN",
+      "location": "Hyderabad, Telangana"
+    },
+    {
+      "id": "usr_officer1",
+      "name": "Dr. V. K. Rao",
+      "email": "vk.rao@agri.gov.in",
+      "role": "OFFICER",
+      "location": "Vijayawada Region"
+    },
+    {
+      "id": "usr_admin1",
+      "name": "System Admin",
+      "email": "admin@greengrow.ai",
+      "role": "ADMIN",
+      "location": "HQ Central"
+    }
+  ],
+  "plants": [
+    {
+      "id": "plt_101",
+      "userId": "usr_farmer1",
+      "plantName": "Tomato - Hybrid Roma",
+      "species": "Solanum lycopersicum",
+      "growthStage": "Flowering",
+      "healthScore": 88,
+      "diseaseName": "Early Blight (Initial)",
+      "pestDetected": "Whiteflies (Low severity)",
+      "confidenceScore": 94,
+      "imageUrl": "/tomato_early_blight.jpg",
+      "location": "Field Sector A2, Guntur",
+      "soilType": "Red Loam Soil (pH 6.5)",
+      "createdAt": "2026-07-30T14:15:21.846Z",
+      "recommendations": {
+        "bestSoil": "Well-draining Red Loamic soil, pH 6.2 - 6.8",
+        "waterReqLitersPerDay": 18,
+        "minWaterNeededLiters": 12,
+        "fertilizerType": "NPK 19-19-19 + Calcium Nitrate",
+        "minFertilizerKgPerAcre": 4.5,
+        "organicAlternative": "Neem Cake (50kg/acre) + Vermicompost spray",
+        "optimalIrrigationTime": "Early Morning (6:00 AM - 7:30 AM)",
+        "diseasePrevention": "Apply Copper Oxychloride 3g/L or Neem Oil 5ml/L spray every 10 days.",
+        "nutrientAdvice": "Magnesium and Micronutrient spray needed during flowering to prevent leaf drop.",
+        "explanation": "Early blight fungal spores detected on lower leaves due to recent humidity. Targeted organic neem oil spray coupled with controlled drip irrigation prevents spore proliferation while preserving soil microbes."
+      },
+      "predictions": {
+        "daysToHarvest": 38,
+        "estimatedYieldKgPerAcre": 4200,
+        "harvestDate": "2026-09-06",
+        "diseaseRiskLevel": "Medium",
+        "nutrientDeficiencyRisk": "Nitrogen & Calcium deficiency if rainy",
+        "waterStressRiskLevel": "Low",
+        "growthProjectionSummary": "Plant is progressing steadily toward fruiting. High yield potential if fungal leaf spots are managed now."
+      }
+    },
+    {
+      "id": "plt_102",
+      "userId": "usr_farmer1",
+      "plantName": "Paddy Rice - Sona Masoori",
+      "species": "Oryza sativa",
+      "growthStage": "Tillering",
+      "healthScore": 95,
+      "diseaseName": "None (Healthy)",
+      "pestDetected": "None",
+      "confidenceScore": 98,
+      "imageUrl": "/healthy_paddy_rice.jpg",
+      "location": "Wetland Sector B",
+      "soilType": "Clayey Alluvial Soil",
+      "createdAt": "2026-07-27T14:15:21.846Z",
+      "recommendations": {
+        "bestSoil": "Heavy Clay soil with high water retention capacity",
+        "waterReqLitersPerDay": 45,
+        "minWaterNeededLiters": 32,
+        "fertilizerType": "Urea (split dosage) + Zinc Sulfate",
+        "minFertilizerKgPerAcre": 8,
+        "organicAlternative": "Azolla Biofertilizer & Green Manure Incorporation",
+        "optimalIrrigationTime": "Alternate Wetting and Drying (AWD) cycle",
+        "diseasePrevention": "Maintain proper field drainage during tillering phase.",
+        "nutrientAdvice": "Apply Zinc Sulfate @ 10kg/acre to prevent Khaira disease.",
+        "explanation": "AWD irrigation saves up to 35% water without reducing yield. Crop is extremely healthy."
+      },
+      "predictions": {
+        "daysToHarvest": 72,
+        "estimatedYieldKgPerAcre": 5800,
+        "harvestDate": "2026-10-10",
+        "diseaseRiskLevel": "Low",
+        "nutrientDeficiencyRisk": "Zinc deficiency risk in submerged soil",
+        "waterStressRiskLevel": "Low",
+        "growthProjectionSummary": "Tillering rate is optimal. AWD regime recommended for water conservation."
+      }
+    }
+  ],
+  "carePlans": [
+    {
+      "id": "tsk_1",
+      "dayNumber": 1,
+      "dateStr": "2026-07-30",
+      "taskTitle": "Morning Drip Irrigation (15L)",
+      "category": "IRRIGATION",
+      "completed": false,
+      "priority": "HIGH",
+      "instructions": "Operate drip valves for 35 mins at 6:00 AM to minimize surface evaporation."
+    },
+    {
+      "id": "tsk_2",
+      "dayNumber": 2,
+      "dateStr": "2026-07-31",
+      "taskTitle": "Foliar Neem Oil Spray (5ml/L)",
+      "category": "PEST_CONTROL",
+      "completed": false,
+      "priority": "HIGH",
+      "instructions": "Spray under leaves at sunset to prevent aphid and whitefly egg laying."
+    },
+    {
+      "id": "tsk_3",
+      "dayNumber": 3,
+      "dateStr": "2026-08-01",
+      "taskTitle": "Soil Moisture & pH Check",
+      "category": "SOIL_CARE",
+      "completed": false,
+      "priority": "MEDIUM",
+      "instructions": "Verify root zone moisture is above 55%. Soil pH target 6.5."
+    },
+    {
+      "id": "tsk_4",
+      "dayNumber": 4,
+      "dateStr": "2026-08-02",
+      "taskTitle": "Vermicompost Application (2kg/plant)",
+      "category": "FERTILIZER",
+      "completed": false,
+      "priority": "HIGH",
+      "instructions": "Apply organic compost around drip line perimeter and lightly rake into topsoil."
+    },
+    {
+      "id": "tsk_5",
+      "dayNumber": 5,
+      "dateStr": "2026-08-03",
+      "taskTitle": "Prune Lower Diseased Leaves",
+      "category": "INSPECTION",
+      "completed": false,
+      "priority": "MEDIUM",
+      "instructions": "Remove any yellowed or brown-spotted bottom leaves up to 10cm off ground."
+    },
+    {
+      "id": "tsk_6",
+      "dayNumber": 6,
+      "dateStr": "2026-08-04",
+      "taskTitle": "Drain Field for AWD Rice Protocol",
+      "category": "IRRIGATION",
+      "completed": false,
+      "priority": "MEDIUM",
+      "instructions": "Allow surface water to recede to 5cm below soil surface to stimulate root oxygenation."
+    },
+    {
+      "id": "tsk_7",
+      "dayNumber": 7,
+      "dateStr": "2026-08-05",
+      "taskTitle": "Weekly Yield & Health Assessment",
+      "category": "INSPECTION",
+      "completed": false,
+      "priority": "LOW",
+      "instructions": "Upload photo to GreenGrow AI for updated health & harvest score."
+    }
+  ],
+  "citizenReports": [
+    {
+      "id": "tree_1",
+      "userId": "usr_citizen1",
+      "userName": "Ananya Sharma",
+      "title": "Aged Neem Tree needing branch trimming & root care",
+      "treeSpecies": "Azadirachta indica (Neem)",
+      "location": "Jubilee Hills Circle 3, Hyderabad",
+      "lat": 17.4326,
+      "lng": 78.4071,
+      "imageUrl": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=80",
+      "healthStatus": "Needs Care",
+      "description": "Large public neem tree showing dried outer branches and soil compaction near pavement.",
+      "reportedAt": "2026-07-28T14:15:21.846Z",
+      "status": "IN_REVIEW"
+    },
+    {
+      "id": "tree_2",
+      "userId": "usr_citizen1",
+      "userName": "Ravi Kumar",
+      "title": "Newly Planted Mango Sapling Community Park",
+      "treeSpecies": "Mangifera indica (Mango)",
+      "location": "Kukatpally Green Park, Hyderabad",
+      "lat": 17.4948,
+      "lng": 78.3996,
+      "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
+      "healthStatus": "Healthy",
+      "description": "Community planted sapling growing well. Drip watering system setup.",
+      "reportedAt": "2026-07-25T14:15:21.846Z",
+      "status": "RESOLVED"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "alt_1",
+      "title": "High Humidity Weather Alert",
+      "message": "Expected humidity > 82% over Guntur region. High risk of Fungal Leaf Spot on Tomatoes.",
+      "severity": "HIGH",
+      "category": "DISEASE",
+      "createdAt": "2026-07-30T14:15:21.846Z",
+      "read": false
+    },
+    {
+      "id": "alt_2",
+      "title": "Watering Reminder: Alternate Wetting Cycle",
+      "message": "Paddy Sector B requires drain-and-dry inspection today under AWD protocol.",
+      "severity": "MEDIUM",
+      "category": "WATER",
+      "createdAt": "2026-07-30T02:15:21.846Z",
+      "read": false
+    }
+  ],
+  "chatHistory": []
+}

@@ -1,0 +1,6 @@
+{
+  "name": "GreenGrow AI",
+  "description": "AI-Powered Sustainable Farming & Green Ecosystem Platform",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
