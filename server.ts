@@ -701,16 +701,28 @@ app.post('/api/ai/assistant', async (req, res) => {
 });
 
 // Plant CRUD
-app.get('/api/plants', (req, res) => {
+app.post("/api/plants", (req, res) => {
   const db = loadDB();
-  res.json({ plants: db.plants });
-});
 
-app.delete('/api/plants/:id', (req, res) => {
-  const db = loadDB();
-  db.plants = db.plants.filter(p => p.id !== req.params.id);
+  const { plantName, species, location, healthStatus, imageUrl } = req.body;
+
+  const newPlant = {
+    id: "plant_" + Date.now(),
+    plantName,
+    species,
+    location,
+    healthStatus,
+    imageUrl,
+    createdAt: new Date().toISOString(),
+  };
+
+  db.plants.push(newPlant);
   saveDB(db);
-  res.json({ success: true });
+
+  res.json({
+    success: true,
+    plant: newPlant,
+  });
 });
 
 // Care Planner
