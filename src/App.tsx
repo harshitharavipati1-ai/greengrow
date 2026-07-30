@@ -17,14 +17,16 @@ import { AdminPanel } from './components/AdminPanel';
 import { User, UserRole, PlantRecord, AlertItem, AnalysisResult } from './types';
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState<User>({
-    id: 'usr_farmer1',
-    name: 'Ramesh Patel',
-    email: 'ramesh.farmer@greengrow.ai',
-    role: 'FARMER',
-    location: 'Guntur, Andhra Pradesh',
-    farmSizeAcres: 5.5,
-  });
+const [currentUser, setCurrentUser] = useState<User>({
+  id: "guest",
+  name: "Guest",
+  email: "",
+  role: "FARMER",
+  location: "",
+  farmSizeAcres: 0,
+});
+
+const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [activeTab, setActiveTab] = useState<string>('landing');
   const [language, setLanguage] = useState<'en' | 'te'>('en');
@@ -56,9 +58,17 @@ export default function App() {
       .catch(err => console.error('Error fetching alerts:', err));
   };
 
-  useEffect(() => {
-    fetchPlantsAndAlerts();
-  }, []);
+useEffect(() => {
+  fetchPlantsAndAlerts();
+
+  const savedUser = localStorage.getItem("greengrow-user");
+
+  if (savedUser) {
+    setCurrentUser(JSON.parse(savedUser));
+    setIsLoggedIn(true);
+    setActiveTab("dashboard");
+  }
+}, []);
 
   const handleRoleChange = (newRole: UserRole) => {
     setCurrentUser(prev => ({
@@ -98,8 +108,10 @@ export default function App() {
   const unreadAlertsCount = alerts.filter(a => !a.read).length;
 
   return (
-    <div id="greengrow-app-root" className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500 selection:text-emerald-950">
-      
+    <div
+      id="greengrow-app-root"
+      className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500 selection:text-emerald-950"
+    >
       {/* Top Header */}
       <Header
         currentUser={currentUser}
@@ -116,15 +128,15 @@ export default function App() {
 
       {/* View Switcher */}
       <main className="pb-16">
-        {activeTab === 'landing' && (
+        {activeTab === "landing" && (
           <LandingPage
-            onStart={() => setActiveTab('dashboard')}
-            onOpenAssistant={() => setActiveTab('assistant')}
+            onStart={() => setActiveTab("dashboard")}
+            onOpenAssistant={() => setActiveTab("assistant")}
             onOpenFarmerAuth={() => setIsFarmerAuthOpen(true)}
           />
         )}
 
-        {activeTab === 'dashboard' && (
+        {activeTab === "dashboard" && (
           <Dashboard
             currentUser={currentUser}
             plants={plants}
@@ -134,72 +146,71 @@ export default function App() {
           />
         )}
 
-        {activeTab === 'vision' && (
+        {activeTab === "vision" && (
           <PlantVisionUpload
             onAnalysisComplete={handleAnalysisComplete}
-            onNavigateToRecommendations={() => setActiveTab('recommendations')}
+            onNavigateToRecommendations={() => setActiveTab("recommendations")}
           />
         )}
 
-        {activeTab === 'weather' && (
-          <WeatherIntelligence />
-        )}
+        {activeTab === "weather" && <WeatherIntelligence />}
 
-        {activeTab === 'recommendations' && (
+        {activeTab === "recommendations" && (
           <RecommendationPrediction
             selectedPlant={selectedPlant}
-            onNavigateToSimulator={() => setActiveTab('simulator')}
+            onNavigateToSimulator={() => setActiveTab("simulator")}
           />
         )}
 
-        {activeTab === 'simulator' && (
-          <WhatIfSimulator
-            selectedPlant={selectedPlant}
-          />
+        {activeTab === "simulator" && (
+          <WhatIfSimulator selectedPlant={selectedPlant} />
         )}
 
-        {activeTab === 'planner' && (
-          <WeeklyCarePlanner />
+        {activeTab === "planner" && <WeeklyCarePlanner />}
+
+        {activeTab === "sustainability" && <SustainabilityCalculator />}
+
+        {activeTab === "citizen" && <CitizenTreeModule />}
+
+        {activeTab === "assistant" && (
+          <AiFarmingAssistant language={language} setLanguage={setLanguage} />
         )}
 
-        {activeTab === 'sustainability' && (
-          <SustainabilityCalculator />
-        )}
-
-        {activeTab === 'citizen' && (
-          <CitizenTreeModule />
-        )}
-
-        {activeTab === 'assistant' && (
-          <AiFarmingAssistant
-            language={language}
-            setLanguage={setLanguage}
-          />
-        )}
-
-        {activeTab === 'admin' && (
-          <AdminPanel
-            currentUser={currentUser}
-            citizenReports={[]}
-          />
+        {activeTab === "admin" && (
+          <AdminPanel currentUser={currentUser} citizenReports={[]} />
         )}
       </main>
 
       {/* Floating Bottom Quick Navigation for Quick Modules Access */}
-      <div id="quick-floating-nav" className="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 bg-emerald-950/90 border border-emerald-800/80 backdrop-blur-xl rounded-full px-4 py-2 flex items-center space-x-3 text-xs font-bold text-emerald-200 shadow-2xl">
-        <button onClick={() => setActiveTab('vision')} className={`hover:text-white transition-all ${activeTab === 'vision' ? 'text-emerald-400 font-extrabold' : ''}`}>
+      <div
+        id="quick-floating-nav"
+        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 bg-emerald-950/90 border border-emerald-800/80 backdrop-blur-xl rounded-full px-4 py-2 flex items-center space-x-3 text-xs font-bold text-emerald-200 shadow-2xl"
+      >
+        <button
+          onClick={() => setActiveTab("vision")}
+          className={`hover:text-white transition-all ${activeTab === "vision" ? "text-emerald-400 font-extrabold" : ""}`}
+        >
           🌱 Scan Photo
         </button>
         <span className="text-slate-700">•</span>
-        <button onClick={() => setActiveTab('simulator')} className={`hover:text-white transition-all ${activeTab === 'simulator' ? 'text-emerald-400 font-extrabold' : ''}`}>
+        <button
+          onClick={() => setActiveTab("simulator")}
+          className={`hover:text-white transition-all ${activeTab === "simulator" ? "text-emerald-400 font-extrabold" : ""}`}
+        >
           🔮 What-If AI
         </button>
         <span className="text-slate-700">•</span>
-        <button onClick={() => setActiveTab('sustainability')} className={`hover:text-white transition-all ${activeTab === 'sustainability' ? 'text-emerald-400 font-extrabold' : ''}`}>
+        <button
+          onClick={() => setActiveTab("sustainability")}
+          className={`hover:text-white transition-all ${activeTab === "sustainability" ? "text-emerald-400 font-extrabold" : ""}`}
+        >
           📊 Eco Savings
         </button>
         <span className="text-slate-700">•</span>
-        <button onClick={() => setActiveTab('assistant')} className={`hover:text-white transition-all ${activeTab === 'assistant' ? 'text-emerald-400 font-extrabold' : ''}`}>
+        <button
+          onClick={() => setActiveTab("assistant")}
+          className={`hover:text-white transition-all ${activeTab === "assistant" ? "text-emerald-400 font-extrabold" : ""}`}
+        >
           🤖 AI Assistant
         </button>
       </div>
@@ -226,10 +237,15 @@ export default function App() {
         onClose={() => setIsFarmerAuthOpen(false)}
         onLoginSuccess={(user) => {
           setCurrentUser(user);
+          setIsLoggedIn(true);
+
+          localStorage.setItem("greengrow-user", JSON.stringify(user));
+
+          setIsFarmerAuthOpen(false);
+          setActiveTab("dashboard");
         }}
         currentUser={currentUser}
       />
-
     </div>
   );
 }
